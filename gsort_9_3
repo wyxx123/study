@@ -1,0 +1,22 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int int_comparefuction(const void* ele1, const void* ele2)
+{
+	return (*(int*)ele1 - *(int*)ele2);
+}
+
+int main(void)
+{
+	int loop = 0;
+	int array[9] = { 0,12,23,2,514,9,99,999,23 };
+	qsort(array, 9, sizeof(int), int_comparefuction);
+	for (loop = 0; loop < 9; loop++)
+	{
+		printf("%d ", array[loop]);
+	}
+	printf("\n");
+	return 0;
+}
