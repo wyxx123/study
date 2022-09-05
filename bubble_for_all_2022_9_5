@@ -1,0 +1,75 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int int_comparefuction(const void* ele1, const void* ele2)
+{
+	return (*(int*)ele1 - *(int*)ele2);
+}
+
+typedef struct stu
+{
+	char name[20];
+	int birthday;
+}student;
+
+int student_birthday_comparefuction(const void* ele1, const void* ele2)
+{
+	return ((student*)ele1)->birthday - ((student*)ele2)->birthday;
+}
+
+int student_name_comparefuction(const void* ele1, const void* ele2)
+{
+	return strcmp(((student*)ele1)->name, ((student*)ele2)->name);
+}
+
+
+
+void swap(char* left, char* right,int size_of_element)
+{
+	int loop = 0;
+	for (loop = 0; loop < size_of_element; loop++)
+	{
+		char tmp = *left;
+		*left = *right;
+		*right = tmp;
+		left++;
+		right++;
+	}
+}
+
+void all_bubble_sort(void* base, int size_of_array, int size_of_element, int (*compare_fuction)(void*, void*))
+{
+	int loop1 = 0;
+	int loop2 = 0;
+	for (loop1 = 0;loop1<size_of_array-1;loop1++)
+	{
+		for (loop2 = 0;loop2<size_of_array-1-loop1;loop2++)
+		{
+			if (compare_fuction((char*)base + size_of_element * (loop2), (char*)base + size_of_element * (loop2 + 1)) > 0)
+			{
+				swap((char*)base + size_of_element * (loop2), (char*)base + size_of_element * (loop2 + 1),size_of_element);
+			}
+		}
+	}
+}
+
+int main()
+{
+	int i = 0;
+	int int_array[] = { 0,20,3034,5,999 };
+	int size_of_int_array = sizeof(int_array)/ sizeof(int_array[0]);
+	all_bubble_sort(int_array, size_of_int_array, sizeof(int), int_comparefuction);
+	for (i = 0; i < size_of_int_array; i++)
+	{
+		printf("%d ", int_array[i]);
+	}
+	printf("\n");
+	student s_1[3] = { {"xiaowu",13},{"molisha",14},{"lumiya",11} };
+	int size_of_student = sizeof(s_1)/ sizeof(s_1[0]);
+	//all_bubble_sort(s_1, size_of_student, sizeof(s_1[0]), student_name_comparefuction);
+	all_bubble_sort(s_1, size_of_student, sizeof(s_1[0]), student_birthday_comparefuction);
+	return 0;
+}
