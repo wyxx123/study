@@ -1,0 +1,32 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <assert.h>
+
+int get_sum(int input, int n)
+{
+	assert(n > 0);
+	assert(input > 0);
+	int sum = 0;
+	int save = 0;
+	for (; n > 0; n--)
+	{
+		save = save * 10 + input;
+		sum = sum + save;
+	}
+	return sum;
+}
+
+int main()
+{
+	int input = 0;
+	int n = 0;
+	printf("please put in a number:>");
+	scanf("%d", &input);
+	printf("how much time you want to repeat?:>");
+	scanf("%d", &n);
+	int ret = get_sum(input, n);
+
+	printf("the result is:%d", ret);
+	return 0;
+}
