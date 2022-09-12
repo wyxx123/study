@@ -1,0 +1,69 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+void set_array(char* const array,int input)
+{
+	int i = 0;
+	for (i = 0; i < 2*input - 1; i++)
+	{
+		array[i] = ' ';
+	}
+	array[2 * input - 1] = 0;
+}
+
+int main()
+{
+	int input = 0;
+	int loop = 0;
+	while ((scanf("%d", &n) != EOF))
+	
+	input += 1;
+	char array[40] = { 0 };
+	set_array(array,input);
+	for (loop = 0; loop < input - 1; loop++)
+	{
+		char* mid = array + input - 1;
+		char* left = mid - loop;
+		char* right = mid + loop;
+		while (left <= right)
+		{
+			*(left) = '*';
+			*(right) = '*';
+			left += 2;
+			right -= 2;
+		}
+		printf("%s\n", array);
+		set_array(array, input);
+	}
+	
+
+	char* left = array;
+	char* right = array + 2 * input - 2;
+	while (left <= right)
+	{
+		*(left) = '*';
+		*(right) = '*';
+		left += 2;
+		right -= 2;
+	}
+	printf("%s\n", array);
+	set_array(array, input);
+	
+	for (loop = 0; loop < input - 1; loop++)
+	{
+		char* mid = array + input - 1;
+		char* left = array + loop + 1;
+		char* right = array + 2 * input - 3 - loop;
+		while (left <= right)
+		{
+			*(left) = '*';
+			*(right) = '*';
+			left += 2;
+			right -= 2;
+		}
+		printf("%s\n", array);
+		set_array(array, input);
+	}
+	return 0;
+}
